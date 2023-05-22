@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  nginx:
+    #image: nginx_kev
+    build: ./nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - www:/var/www:rw
+    networks:
+      - mynet
+    depends_on:
+      - wordpress
+
+  wordpress:
+    #image: wordpress_kev
+    build: ./wordpress
+    volumes:
+      - www:/var/www:rw
+    networks:
+      - mynet
+    depends_on:
+      - mariadb
+  mariadb:
+    build: ./mariadb
+    networks:
+      - mynet
+
+networks:
+  mynet:
+    driver: bridge
+
+volumes:
+  www:

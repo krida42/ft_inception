@@ -1,6 +1,7 @@
 version: '3.9'
 
 services:
+
   nginx:
     #image: nginx_kev
     build: ./nginx
@@ -13,6 +14,8 @@ services:
       - mynet
     depends_on:
       - wordpress
+    env_file:
+      - .env
 
   wordpress:
     #image: wordpress_kev
@@ -23,10 +26,16 @@ services:
       - mynet
     depends_on:
       - mariadb
+    env_file:
+      - .env
+
   mariadb:
     build: ./mariadb
     networks:
       - mynet
+    env_file:
+      - .env
+
 
 networks:
   mynet:

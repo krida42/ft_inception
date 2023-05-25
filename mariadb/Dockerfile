@@ -11,5 +11,6 @@ RUN	apt install -y \
 COPY	entrypoint.bash .
 
 
-
 ENTRYPOINT ["bash", "entrypoint.bash"]
+
+# EXPOSE 3306

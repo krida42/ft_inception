@@ -14,8 +14,6 @@ services:
       - mynet
     depends_on:
       - wordpress
-    env_file:
-      - .env
 
   wordpress:
     #image: wordpress_kev
@@ -26,16 +24,23 @@ services:
       - mynet
     depends_on:
       - mariadb
-    env_file:
-      - .env
+    environment:
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      WORDPRESS_USERNAME: ${WORDPRESS_USERNAME}
+      WORDPRESS_PASSWORD: ${WORDPRESS_PASSWORD}
+      WORDPRESS_EMAIL: ${WORDPRESS_EMAIL}
 
   mariadb:
     build: ./mariadb
     networks:
       - mynet
-    env_file:
-      - .env
-
+    environment:
+      DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD} 
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
 
 networks:
   mynet:

@@ -28,11 +28,11 @@ RUN	chown -R www-data:www-data /var/www \
 	&& cd /var/www/html \
 	&& sudo -u www-data -- wp core download
 
-COPY	conf/www.conf /etc/php/7.3/fpm/pool.d
+RUN mkdir -p /run/php/php7.3-fpm && mkdir /shared
 
-# COPY	conf/wp-config.php /var/www/html
+COPY conf/www.conf /etc/php/7.3/fpm/pool.d
 
-COPY	entrypoint.bash .
+COPY entrypoint.bash .
 
 
 ENTRYPOINT ["bash", "entrypoint.bash"]

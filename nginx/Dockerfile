@@ -23,9 +23,6 @@ COPY	entrypoint.bash .
 
 COPY	conf/default /etc/nginx/sites-available
 
-COPY	html/index.php /var/www/html
-
-
 
 EXPOSE 443
 EXPOSE 80

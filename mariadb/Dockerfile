@@ -7,6 +7,7 @@ RUN	apt update && apt install -y \
 RUN	apt install -y \
 	mariadb-server
 
+RUN mkdir /shared
 
 COPY	entrypoint.bash .
 

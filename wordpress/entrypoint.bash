@@ -1,12 +1,20 @@
 #!/bin/bash
 
-service php7.3-fpm start
+# until mysql -h mariadb -u ${DB_USER} -p${DB_PASSWORD} -e 'select 1'; do
+#   echo "En attente de MariaDB..."
+#   sleep 1
+# done
 
-# Attendre que MariaDB soit prêt à accepter les connexions
-until mysql -h mariadb -u ${DB_USER} -p${DB_PASSWORD} -e 'select 1'; do
+until [ -f /shared/mariadb_ready ]; do
+  echo "En attente du semaphore..."
+  sleep 1
+done
+
+until mysqladmin ping -h mariadb -u ${DB_USER} -p${DB_PASSWORD} --silent; do
   echo "En attente de MariaDB..."
   sleep 1
 done
+
 
 cd /var/www/html
 
@@ -27,5 +35,4 @@ sudo -u www-data -- \
         --admin_email=${WORDPRESS_EMAIL}
 
 
-
-tail -f /dev/null
+exec php-fpm7.3 -F

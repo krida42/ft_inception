@@ -20,6 +20,7 @@ services:
     build: ./wordpress
     volumes:
       - www:/var/www:rw
+      - shared:/shared:rw
     networks:
       - mynet
     depends_on:
@@ -36,6 +37,8 @@ services:
     build: ./mariadb
     networks:
       - mynet
+    volumes:
+      - shared:/shared:rw
     environment:
       DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD} 
       DB_NAME: ${DB_NAME}
@@ -48,3 +51,4 @@ networks:
 
 volumes:
   www:
+  shared:

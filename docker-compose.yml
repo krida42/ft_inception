@@ -19,8 +19,8 @@ services:
     #image: wordpress_kev
     build: ./wordpress
     volumes:
-      - www:/var/www:rw
-      - shared:/shared:rw
+      - www:/var/www
+      - shared:/shared
     networks:
       - mynet
     depends_on:
@@ -38,9 +38,10 @@ services:
     networks:
       - mynet
     volumes:
-      - shared:/shared:rw
+      - db:/var/lib/mysql
+      - shared:/shared
     environment:
-      DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD} 
+      DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
@@ -51,4 +52,13 @@ networks:
 
 volumes:
   www:
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/kevin/data/www
+  db:
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/kevin/data/db
   shared:

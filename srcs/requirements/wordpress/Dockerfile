@@ -22,9 +22,9 @@ RUN	mkdir /var/www \
 
 RUN mkdir -p /run/php/php7.3-fpm && mkdir /shared
 
-COPY conf/www.conf /etc/php/7.3/fpm/pool.d
+RUN sed -i '/^listen = /c\listen = 9000' /etc/php/7.3/fpm/pool.d/www.conf
 
-COPY entrypoint.bash .
+COPY tools/entrypoint.bash .
 
 
 ENTRYPOINT ["bash", "entrypoint.bash"]

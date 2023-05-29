@@ -19,7 +19,7 @@ RUN		openssl req \
 		-keyout /etc/nginx/ssl/selfsigned.key \
 		-out /etc/nginx/ssl/selfsigned.crt
 
-COPY	entrypoint.bash .
+COPY	tools/entrypoint.bash .
 
 COPY	conf/default /etc/nginx/sites-available
 

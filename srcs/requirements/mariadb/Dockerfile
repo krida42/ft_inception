@@ -11,7 +11,7 @@ RUN mkdir /shared
 
 RUN sed -i '/^bind-address/c\bind-address = 0.0.0.0' /etc/mysql/mariadb.conf.d/50-server.cnf
 
-COPY	entrypoint.bash .
+COPY	tools/entrypoint.bash .
 
 
 ENTRYPOINT ["bash", "entrypoint.bash"]

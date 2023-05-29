@@ -1,11 +1,22 @@
+FILE := srcs/docker-compose.yml
+DC := docker-compose -f $(FILE)
+
 build:
-	docker-compose build
+	$(DC) build -q
 
 up: build
-	docker-compose up -d 
+	$(DC) up -d
 
 down:
-	docker-compose down -v
+	$(DC) down
 
-test:
-	docker run -it --name test --rm -p 3306:3306 debian:buster bash
+clean:
+	$(DC) down -v
+
+re: clean up
+
+ps:
+	$(DC)  ps -a
+
+logs:
+	$(DC) logs

@@ -26,6 +26,8 @@ RUN sed -i '/^listen = /c\listen = 9000' /etc/php/7.3/fpm/pool.d/www.conf
 
 RUN apt install -y php-redis
 
+COPY conf/bonus bonus/
+
 COPY tools/entrypoint.bash .
 
 

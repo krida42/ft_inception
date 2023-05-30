@@ -1,7 +1,8 @@
 #!/bin/bash
 
-if [ ! -d /var/www/html ]; then
-  echo "Le dossier html n'existe pas"
+chown -R www-data:www-data /var/www
+if [ ! -d /var/www/html/wp-config.php ]; then
+  echo "Le fichier wp-config.php n'existe pas"
   
   cd /var/www/
   rm -rf * && rm -rf .*
@@ -10,16 +11,13 @@ if [ ! -d /var/www/html ]; then
   cd html
   sudo -u www-data -- wp core download
 
-  sudo -u www-data -- wget https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php -O adminer.php
-  sudo -u www-data -- wget https://raw.githubusercontent.com/lukashron/adminer-dark-theme/master/dist/adminer.css -O adminer.css
-  
-else
-  echo "Le dossier html existe"
-fi
+  sudo -u www-data -- wget https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php -O adminer.php &> /dev/null
+  sudo -u www-data -- wget https://raw.githubusercontent.com/lukashron/adminer-dark-theme/master/dist/adminer.css -O adminer.css &> /dev/null
 
-cd /var/www/html
+  cp -r /bonus .
 
-if [ ! -f /var/www/html/wp-config.php ]; then
+  cd /var/www/html
+
 
   sudo -u www-data -- \
       wp config create \
@@ -28,7 +26,12 @@ if [ ! -f /var/www/html/wp-config.php ]; then
           --dbpass=${DB_PASSWORD} \
           --dbhost=mariadb \
           --dbprefix=wp_
+  
+else
+  echo "Le fichier wp-config existe"
 fi
+
+
 
 until [ -f /shared/mariadb_ready ]; do
   echo "En attente du semaphore..."
@@ -39,6 +42,10 @@ until mysqladmin ping -h mariadb -u ${DB_USER} -p${DB_PASSWORD} --silent; do
   echo "En attente de MariaDB..."
   sleep 1
 done
+
+
+cd /var/www/html
+
 
 sudo -u www-data -- \
     wp core install \

@@ -87,6 +87,32 @@ server {
 }
 
 
+
+
+server {
+	listen 443 ssl;
+	listen [::]:443 ssl;
+
+	server_name bonus.kisikaya.42.fr;
+
+	ssl	on;
+	ssl_protocols	TLSv1.3;
+	
+	ssl_certificate 	/etc/nginx/ssl/selfsigned.crt;
+	ssl_certificate_key	/etc/nginx/ssl/selfsigned.key;
+
+	root /var/www/html/bonus; 
+
+	index index.html;
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+}
+
+
+
+
 # Virtual Host configuration for example.com
 #
 # You can move that to a different file under sites-available/ and symlink that

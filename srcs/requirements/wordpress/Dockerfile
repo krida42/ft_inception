@@ -24,6 +24,8 @@ RUN mkdir -p /run/php/php7.3-fpm && mkdir /shared
 
 RUN sed -i '/^listen = /c\listen = 9000' /etc/php/7.3/fpm/pool.d/www.conf
 
+RUN apt install -y php-redis
+
 COPY tools/entrypoint.bash .
 
 

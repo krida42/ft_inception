@@ -46,4 +46,14 @@ sudo -u www-data -- \
         --admin_email=${WORDPRESS_EMAIL}
 
 
+if ! grep -q 'WP_REDIS_HOST' /var/www/html/wp-config.php; then
+  sed -i "1a define('WP_REDIS_HOST', 'redis');" /var/www/html/wp-config.php
+  sudo -u www-data -- wp plugin install redis-cache --activate
+  sudo -u www-data -- wp redis enable
+fi
+
+
+
+
+
 exec php-fpm7.3 -F

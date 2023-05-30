@@ -1,12 +1,11 @@
 version: '3.9'
 
 services:
-
   nginx:
     #image: nginx_kev
     build: requirements/nginx
     ports:
-      - "80:80"
+      # - "80:80"
       - "443:443"
     volumes:
       - www:/var/www:rw
@@ -45,6 +44,12 @@ services:
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
+  
+  redis:
+    build: requirements/bonus/redis
+    networks:
+      - mynet
+
 
 networks:
   mynet:

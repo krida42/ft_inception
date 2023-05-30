@@ -1,8 +1,14 @@
 FILE := srcs/docker-compose.yml
 DC := docker-compose -f $(FILE)
 
-build:
-	$(DC) build -q
+
+
+build: create_dir
+	$(DC) build
+
+create_dir:
+	mkdir -p $(HOME)/data/www
+	mkdir -p $(HOME)/data/db
 
 up: build
 	$(DC) up -d
@@ -12,6 +18,9 @@ down:
 
 clean:
 	$(DC) down -v
+
+cuicui: clean
+	rm -rf /home/kevin/data/*
 
 re: clean up
 

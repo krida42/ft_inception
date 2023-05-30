@@ -25,7 +25,7 @@ COPY	conf/default /etc/nginx/sites-available
 
 
 EXPOSE 443
-EXPOSE 80
+# EXPOSE 80
 
 
 ENTRYPOINT ["bash", "entrypoint.bash"]

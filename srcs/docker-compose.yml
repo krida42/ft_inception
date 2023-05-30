@@ -63,6 +63,13 @@ services:
       - "21:21"
     environment:
       FTP_PASSWORD: ${FTP_PASSWORD}
+
+  nodered:
+    build: requirements/bonus/nodered
+    volumes:
+      - nodered:/var/nodered/data
+    ports:
+      - "1880:1880"
     
 
 
@@ -82,3 +89,4 @@ volumes:
       o: bind
       device: /home/kevin/data/db
   shared:
+  nodered:

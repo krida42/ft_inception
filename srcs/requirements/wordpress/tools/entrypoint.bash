@@ -9,6 +9,9 @@ if [ ! -d /var/www/html ]; then
   sudo -u www-data mkdir html
   cd html
   sudo -u www-data -- wp core download
+
+  sudo -u www-data -- wget https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php -O adminer.php
+  sudo -u www-data -- wget https://raw.githubusercontent.com/lukashron/adminer-dark-theme/master/dist/adminer.css -O adminer.css
   
 else
   echo "Le dossier html existe"

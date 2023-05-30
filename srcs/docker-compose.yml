@@ -47,8 +47,23 @@ services:
   
   redis:
     build: requirements/bonus/redis
+    depends_on:
+      - wordpress
     networks:
       - mynet
+  
+  vsftpd:
+    build: requirements/bonus/vsftpd
+    depends_on:
+      - wordpress
+    volumes:
+      - www:/var/www
+    ports:
+      - "20:20"
+      - "21:21"
+    environment:
+      FTP_PASSWORD: ${FTP_PASSWORD}
+    
 
 
 networks:

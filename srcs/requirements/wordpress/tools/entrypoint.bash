@@ -15,6 +15,7 @@ if [ ! -d /var/www/html/wp-config.php ]; then
   sudo -u www-data -- wget https://raw.githubusercontent.com/lukashron/adminer-dark-theme/master/dist/adminer.css -O adminer.css &> /dev/null
 
   cp -r /bonus .
+  chown -R www-data:www-data bonus
 
   cd /var/www/html
 

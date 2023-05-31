@@ -6,12 +6,12 @@ RUN apt update && apt install -y \
 RUN apt install -y \
     vsftpd
 
-RUN useradd -m ftpuser && usermod -aG www-data ftpuser \
-    && echo "ftpuser:pass" | chpasswd
-
 
 RUN mkdir -p /var/run/vsftpd/empty
 
 COPY conf/vsftpd.conf .
+COPY tools/entrypoint.bash .
 
-CMD [ "vsftpd", "/vsftpd.conf" ]
+ENTRYPOINT [ "bash", "entrypoint.bash" ]
+
+# CMD [ "vsftpd", "/vsftpd.conf" ]

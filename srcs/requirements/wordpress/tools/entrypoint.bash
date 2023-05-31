@@ -55,6 +55,8 @@ sudo -u www-data -- \
         --admin_password=${WORDPRESS_PASSWORD} \
         --admin_email=${WORDPRESS_EMAIL}
 
+sudo -u www-data --  wp user create ${WP_USER_USERNAME} ${WP_USER_EMAIL} --user_pass=${WP_USER_PASSWORD}
+
 
 if ! grep -q 'WP_REDIS_HOST' /var/www/html/wp-config.php; then
   sed -i "1a define('WP_REDIS_HOST', 'redis');" /var/www/html/wp-config.php

@@ -62,8 +62,7 @@ if ! grep -q 'WP_REDIS_HOST' /var/www/html/wp-config.php; then
   sudo -u www-data -- wp redis enable
 fi
 
-
-
+chmod -R g+w /var/www
 
 
 exec php-fpm7.3 -F

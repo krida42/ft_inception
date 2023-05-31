@@ -82,11 +82,12 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/kevin/data/www
+      device: ${HOME}/data/www
   db:
     driver_opts:
       type: none
       o: bind
-      device: /home/kevin/data/db
+      device: ${HOME}/data/db
   shared:
   nodered:
+  log:

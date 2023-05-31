@@ -1,5 +1,5 @@
 FILE := srcs/docker-compose.yml
-DC := docker-compose -f $(FILE)
+DC := docker compose -f $(FILE)
 
 
 
@@ -20,7 +20,7 @@ clean:
 	$(DC) down -v
 
 cuicui: clean
-	rm -rf /home/kevin/data/*
+	rm -rf /home/kisikaya/data/*
 
 re: clean up
 

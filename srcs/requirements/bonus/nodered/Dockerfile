@@ -11,6 +11,5 @@ RUN mkdir -p /var/nodered/data/
 
 EXPOSE 1880
 
-
 CMD ["node-red", "--userDir", "/var/nodered/data"]
 
